@@ -1,0 +1,5 @@
+<div class="row">
+@for (product of products; track $index) {
+    <div product-cart [product]="product" (productEmitted)="productEmittedToAdd($event)" class="col-4"></div>
+}
+</div>

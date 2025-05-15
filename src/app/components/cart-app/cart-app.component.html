@@ -1,0 +1,14 @@
+<h1 class="text-center mb-3">Catalogo de productos</h1>
+
+<catalog [products]="products" (addToCart)="handleProductAdded($event)"/>
+
+@if (cartItems.length) {
+    <cart [cartItems]="cartItems" (itemForRemoved)="removeItemFromCart($event)"/>
+}@else {
+    <div class="alert alert-info">
+        <h4 class="alert-heading">No hay productos en el carrito</h4>
+        <p>Agrega productos en el carrito para verlos aquí</p>
+        <hr>
+        <p class="mb-0">Feliz compra!</p>
+    </div>
+}
