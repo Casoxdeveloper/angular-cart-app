@@ -1,14 +1,33 @@
-<h1 class="text-center mb-3">Catalogo de productos</h1>
+<navbar [cartItems]="cartItems" (toggleCartEmitter)="setShowCart()"/>
 
-<catalog [products]="products" (addToCart)="handleProductAdded($event)"/>
+<div class="container">
+  <h1 class="text-center mb-3">Catalogo de productos</h1>
+  <!-- <button class="btn btn-info" (click)="setShowCart()">
+  cart {{ cartItems.length }}
+</button> -->
 
-@if (cartItems.length) {
-    <cart [cartItems]="cartItems" (itemForRemoved)="removeItemFromCart($event)"/>
-}@else {
-    <div class="alert alert-info">
+  <div class="row">
+    <div [className]="showCart ? 'col-9' : 'col'">
+      <catalog [products]="products" (addToCart)="handleProductAdded($event)" />
+    </div>
+    @if (showCart) {
+    <div class="col-3">
+      @if (cartItems.length) {
+      <cart
+        [cartItems]="cartItems"
+        [total]="total"
+        (itemForRemoved)="removeItemFromCart($event)"
+        (itemQuantityUpdated)="updateItemQuantity($event)"
+      />
+      }@else {
+      <div class="alert alert-info">
         <h4 class="alert-heading">No hay productos en el carrito</h4>
         <p>Agrega productos en el carrito para verlos aquí</p>
-        <hr>
+        <hr />
         <p class="mb-0">Feliz compra!</p>
+      </div>
+      }
     </div>
-}
+    }
+  </div>
+</div>

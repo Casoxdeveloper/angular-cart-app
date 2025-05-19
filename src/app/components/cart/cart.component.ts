@@ -14,9 +14,10 @@ import { FormsModule } from '@angular/forms';
 export class CartComponent {
 
  @Input() cartItems: CartItem[]=[];
+ @Input() total:number=0;
  @Output() cartUpdated=new EventEmitter<CartItem[]>();
  @Output() itemForRemoved=new EventEmitter<CartItem>();
- @Output() itemQuantityUpdated=new EventEmitter<CartItem>();
+ @Output() itemQuantityUpdated=new EventEmitter<CartItem[]>();
  
 
 
@@ -29,6 +30,7 @@ export class CartComponent {
   this.cartItems=this.cartItems.map(i=>i.product.id===updatedItem.product.id?updatedItem:i);
   // Emit change to parent component
   this.cartUpdated.emit(this.cartItems);
+  this.itemQuantityUpdated.emit(this.cartItems);
 
 
   // item.quantity=newQuantity;
@@ -47,6 +49,7 @@ export class CartComponent {
   this.cartItems=this.cartItems.map(i=>i.product.id===updatedItem.product.id?updatedItem:i);
   //Emit change to parent component
   this.cartUpdated.emit(this.cartItems);
+  this.itemQuantityUpdated.emit(this.cartItems);
  }
 
  decreaseQuantity(item:CartItem):void{
@@ -56,6 +59,7 @@ export class CartComponent {
   this.cartItems=this.cartItems.map(i=>i.product.id===updatedItem.product.id?updatedItem:i);
   //Emit change to parent component
   this.cartUpdated.emit(this.cartItems);
+  this.itemQuantityUpdated.emit(this.cartItems);
  }
 
  removeItem(item:CartItem):void{

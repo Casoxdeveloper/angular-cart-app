@@ -7,7 +7,7 @@
       <th>Price</th>
       <th>Quantity</th>
       <th>Total</th>
-      <th></th>
+      
     </tr>
   </thead>
   <tbody>
@@ -48,7 +48,7 @@
           <input
             type="number"
             [(ngModel)]="item.quantity"
-            (change)="updateQuantity(item, item.quantity)"
+           (ngModelChange)="updateQuantity(item, $event)"
             min="1"
             class="form-control"
           />
@@ -61,4 +61,12 @@
       </td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" class="text-end fw-bold">Total:</td>
+      <td colspan="2" class="text-end fw-bold">
+        {{ total|currency }}
+      </td> 
+    </tr>
+  </tfoot>
 </table>
